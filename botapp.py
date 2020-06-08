@@ -49,8 +49,10 @@ def reply_to_tweets():
                 api.update_status('@'+ mention.user.screen_name + ' Hey there! Bot here!', mention.id)
 
             
-    except Exception as err:
-        print("Unexpected error:", sys.exc_info()[0])
+    except Exception as ex:
+        error_template = "Error ocurred while replying to tweet : An exception of type {0} ocurred. Arguments: \n{1!r}"
+        error_msg = error_template.format(type(ex).__name__ , ex.args)
+        return {'error': [error_msg]}
     
 
 while True:
